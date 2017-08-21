@@ -43,9 +43,13 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // // render the error page
+  // res.status(err.status || 500);
+  // res.render('error');
+
+  // since this is an api, error will be in mine of type applicaiotn/json
+  // so above is replace with:
+  res.status(err.status || 500).json({'message':'api error'});
 });
 
 module.exports = app;
